@@ -19,7 +19,6 @@ public class Calculadora {
 	static float op2; //Segundo Operando
 	static String opr;//Operador
 	static char crctr; //Caracter cualquiera
-	static byte num; //cifra cualquiera
 	
 	/**
 	 * @param args
@@ -112,6 +111,8 @@ public class Calculadora {
 				división();
 				break;
 			case "%":
+			case "mod":
+			case "||":
 				modulo();
 				break;
 			case "sqrt":
@@ -154,13 +155,19 @@ public class Calculadora {
 	 * Identificamos el tipo de operacion solicitada
 	 */
 	public static String identif(String op){ 
-		for(int x = 0;x < op.length();x++) {
+		for(int x = 0;x <= op.length();x++) {
 			crctr  = op.charAt(x);	
-			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == "^") {
-				
+			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') {
+				opr = String.valueOf(crctr);
+			} else {
+				for (byte i = 0;i < 10;i++) {
+					if (crctr != i) {
+						
+					}
+				}
 			}
 		}
-		return "";
+		return opr;
 	}
 	
 	public static void menornum() {
