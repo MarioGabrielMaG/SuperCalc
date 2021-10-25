@@ -18,6 +18,8 @@ public class Calculadora {
 	static float op1; //Primer Operando
 	static float op2; //Segundo Operando
 	static String opr;//Operador
+	static char crctr; //Caracter cualquiera
+	static byte num; //cifra cualquiera
 	
 	/**
 	 * @param args
@@ -29,26 +31,21 @@ public class Calculadora {
 		System.out.println("*    -Introduce una operación-    *");
 		System.out.println("***********************************");
 		op = inp.next();
-		System.out.print(op);
-		switch (op.toUpperCase()){
 		
+		switch (op.toUpperCase()){
 		case "A":
 			ListaOperaciones();
 			break;
-			
 		case "B": 
 			Ayuda();
 			break;
 		default:
-			Operaciones();
-			
-		
-		
+			Operaciones(op);
 		}
 		
 	}
-	public static void ListaOperaciones() { //menú de operaciones
-		
+	
+	public static void ListaOperaciones() { //menú de operaciones	
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Las operaciónes disponibles son:");
@@ -70,11 +67,10 @@ public class Calculadora {
 		System.out.println("*Menor número (<)");
 		System.out.println("");
 		System.out.println("");
-		System.out.println("*Para más información sobre la sintaxis y uso de las operaciónes dirijasé al menú de ayuda*");
-		
+		System.out.println("*Para más información sobre la sintaxis y uso de las operaciónes dirijasé al menú de ayuda*");	
 	}
-	public static void Ayuda() {	//menú de ayuda
-		
+	
+	public static void Ayuda() {	//menú de ayuda	
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Ayuda sobre el uso de las operaciónes:");
@@ -96,14 +92,13 @@ public class Calculadora {
 		System.out.println("*Menor número (A<B = menor número entre A y B)");
 		System.out.println("");
 		System.out.println("");
-		System.out.println("*Vuelva al menú para operar*");
-		
-		
+		System.out.println("*Vuelva al menú para operar*");	
 	}
-	public static void Operaciones() {	//filtramos la operación recibida por el usuario
+	
+	public static void Operaciones(String op) {	//filtramos la operación recibida por el usuario
+		identif(op);
 		
-		switch (op) {
-		
+		switch (opr) {
 			case "+":
 				suma();
 				break;
@@ -150,70 +145,89 @@ public class Calculadora {
 				menornum();
 				break;
 			default:
-				
-				
-				
-				
-				
-				
-		
-		
-		
+				System.out.println("Operación " + opr + " no soportada");
 		}
 		
 	}
+	
+	/*
+	 * Identificamos el tipo de operacion solicitada
+	 */
+	public static String identif(String op){ 
+		for(int x = 0;x < op.length();x++) {
+			crctr  = op.charAt(x);	
+			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == "^") {
+				
+			}
+		}
+		return "";
+	}
+	
 	public static void menornum() {
 		
 		
 	}
+	
 	public static void mayornum() {
 		
 		
 	}
+	
 	public static void arcos() {
 		
 		
 	}
+	
 	public static void arcseno() {
 		
 		
 	}
+	
 	public static void tangente() {
 		
 		
 	}
+	
 	public static void coseno() {
 		
 		
 	}
+	
 	public static void seno() {
 		
 		
 	}
+	
 	public static void potencia() {
 		
 		
 	}
+	
 	public static void factorial() {
 		
 		
 	}
+	
 	public static void raiz() {
 		
 		
 	}
+	
 	public static void modulo() {
 		
 		
 	}
+	
 	public static void división() {
 		
 		
 	}
+	
 	public static void multiplicacion() {
 		
 		
 	}
+	
 	public static void resta() {
 		
 		
