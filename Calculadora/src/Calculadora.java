@@ -19,6 +19,7 @@ public class Calculadora {
 	static float op2; //Segundo Operando
 	static String opr;//Operador
 	static char crctr; //Caracter cualquiera
+	static String num; //Número cualquiera
 	
 	/**
 	 * @param args
@@ -29,6 +30,7 @@ public class Calculadora {
 		System.out.println("*                o                *");
 		System.out.println("*    -Introduce una operación-    *");
 		System.out.println("***********************************");
+		System.out.print("> ");
 		op = inp.next();
 		
 		switch (op.toUpperCase()){
@@ -95,7 +97,17 @@ public class Calculadora {
 	}
 	
 	public static void Operaciones(String op) {	//filtramos la operación recibida por el usuario
-		identif(op);
+		opr = identif(op).toUpperCase();
+		op2 = Float.parseFloat(op.split(opr).toString());
+		
+		for (int x = 0;x <= (op.length() - 1);x++) {
+			crctr = op.charAt(x);
+			for (int i = 48;i <= 57;i++) {
+				if(i == (int) crctr) {
+					//almacenar primer operando
+				}
+			}
+		}
 		
 		switch (opr) {
 			case "+":
@@ -111,11 +123,11 @@ public class Calculadora {
 				división();
 				break;
 			case "%":
-			case "mod":
+			case "MOD":
 			case "||":
 				modulo();
 				break;
-			case "sqrt":
+			case "SQRT":
 				raiz();
 				break;
 			case "!":
@@ -155,14 +167,27 @@ public class Calculadora {
 	 * Identificamos el tipo de operacion solicitada
 	 */
 	public static String identif(String op){ 
-		for(int x = 0;x <= op.length();x++) {
+		for(int x = 0;x <= (op.length() - 1);x++) {
 			crctr  = op.charAt(x);	
 			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') {
 				opr = String.valueOf(crctr);
 			} else {
-				for (byte i = 0;i < 10;i++) {
-					if (crctr != i) {
-						
+				for (byte i = 65;i <= 90;i++) {
+					if (i == (int) crctr) {
+						if (opr != null) {
+							opr = opr + crctr;
+						} else {
+							opr = Character.toString(crctr);
+						}
+					}
+				}
+				for (byte i = 97;i <= 122;i++) {
+					if (i == (int) crctr) {
+						if (opr != null) {
+							opr = opr + crctr;
+						} else {
+							opr = Character.toString(crctr);
+						}
 					}
 				}
 			}
