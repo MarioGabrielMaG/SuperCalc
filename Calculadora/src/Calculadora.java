@@ -25,6 +25,10 @@ public class Calculadora {
 	 * @param args
 	 */
 	public static void main(String[] args) {	
+		
+		menu();
+	}
+	public static void menu() {
 		System.out.println("***********************************");
 		System.out.println("* A -Lista Operaciones  B - Ayuda *");
 		System.out.println("*                o                *");
@@ -43,7 +47,6 @@ public class Calculadora {
 		default:
 			Operaciones(op);
 		}
-		
 	}
 	
 	public static void ListaOperaciones() { //menú de operaciones	
@@ -231,40 +234,72 @@ public class Calculadora {
 	}
 	
 	public static void potencia() {
-		
+		res =(float)Math.pow(op1,op2);
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	
 	public static void factorial() {
-		
+	
+		for(int a = 1 ; a<op2 ; a++) {
+			if(a ==1) {
+			res = op2 * (op2-1);
+			op2--;
+			}
+			else {
+			res =res*(op2-1);
+			}
+		}
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	
 	public static void raiz() {
-		
+		res =(float) Math.sqrt(op2);
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	
 	public static void modulo() {
-		
+		res = op1%op2;
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	
 	public static void división() {
-		
-		
+		if(op2!=0) {
+			res = op1/op2;
+			System.out.print(res+" ");
+		}
+		else {
+			System.out.println("Error, el divisor no puede ser 0");
+		}
+		menu();
 	}
+		
+	
 	
 	public static void multiplicacion() {
-		
+		res = op1*op2;
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	
 	public static void resta() {
-		
+		res = op1-op2;
+		System.out.print(res+" ");
+		menu();
 		
 	}
 	public static void suma() {
+		res = op1+op2;
+		System.out.print(res+" ");
+		menu();
 		
 		
 		
