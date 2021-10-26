@@ -107,10 +107,18 @@ public class Calculadora {
 			crctr = op.charAt(x);
 			for (int i = 48;i <= 57;i++) {
 				if(i == (int) crctr) {
-					//almacenar primer operando
+					if (op1 == 0) {
+						op1 = crctr;
+					} else {
+						op1 = op1 + crctr;
+					}
 				}
 			}
 		}
+		
+		System.out.print(opr);
+		System.out.print(op1);
+		System.out.print(op2);
 		
 		switch (opr) {
 			case "+":
