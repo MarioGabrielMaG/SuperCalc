@@ -20,6 +20,7 @@ public class Calculadora {
 	static String opr;//Operador
 	static char crctr; //Caracter cualquiera
 	static String num; //Número cualquiera
+	static String opArr[]; //Almacena un array con la operacion dividida en operandos
 	
 	/**
 	 * @param args
@@ -101,24 +102,24 @@ public class Calculadora {
 	
 	public static void Operaciones(String op) {	//filtramos la operación recibida por el usuario
 		opr = identif(op).toUpperCase();
-		op2 = Float.parseFloat(op.split(opr).toString());
 		
-		for (int x = 0;x <= (op.length() - 1);x++) {
-			crctr = op.charAt(x);
-			for (int i = 48;i <= 57;i++) {
-				if(i == (int) crctr) {
-					if (op1 == 0) {
-						op1 = crctr;
-					} else {
-						op1 = op1 + crctr;
-					}
-				}
-			}
+		switch(opr){
+		case "+": 
+			opArr = op.split("\\+");
+			break;
+		case "*": 
+			opArr = op.split("\\*");
+			break;
+		case "^": 
+			opArr = op.split("\\^");
+			break;
+		default:
+			opArr = op.split(opr);
+			break;
 		}
 		
-		System.out.print(opr);
-		System.out.print(op1);
-		System.out.print(op2);
+		op2 = Integer.parseInt(opArr[1]);
+		op1 = Integer.parseInt(opArr[0]);
 		
 		switch (opr) {
 			case "+":
