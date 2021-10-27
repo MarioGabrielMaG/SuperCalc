@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Calculadora {
 	//Input 
-	static Scanner inp = new Scanner(System.in);
+	static Scanner inp = new Scanner(System.in).useDelimiter("\n");
 	
 	//Variables globales.
 	static String op; //Operación 
@@ -26,9 +26,9 @@ public class Calculadora {
 	 * @param args
 	 */
 	public static void main(String[] args) {	
-		
 		menu();
 	}
+	
 	public static void menu() {
 		System.out.println("***********************************");
 		System.out.println("* A -Lista Operaciones  B - Ayuda *");
@@ -36,9 +36,9 @@ public class Calculadora {
 		System.out.println("*    -Introduce una operación-    *");
 		System.out.println("***********************************");
 		System.out.print("> ");
-		op = inp.next();
+		op = inp.next().toUpperCase();
 		
-		switch (op.toUpperCase()){
+		switch (op){
 		case "A":
 			ListaOperaciones();
 			break;
@@ -101,7 +101,7 @@ public class Calculadora {
 	}
 	
 	public static void Operaciones(String op) {	//filtramos la operación recibida por el usuario
-		opr = identif(op).toUpperCase();
+		opr = identif(op);
 		
 		switch(opr){
 		case "+": 
@@ -121,7 +121,7 @@ public class Calculadora {
 			break;
 		}
 		
-		op2 = Integer.parseInt(opArr[1]);
+		op2 = Integer.parseInt(opArr[1].split("\r")[0]);
 		op1 = Integer.parseInt(opArr[0]);
 		
 		switch (opr) {
@@ -178,13 +178,27 @@ public class Calculadora {
 		
 	}
 	
-	/*
-	 * Identificamos el tipo de operacion solicitada
+	/**
+	 * Identificar el tipo de operacion solicitada
+	 * @param String op
+	 * @return String opr
 	 */
 	public static String identif(String op){ 
 		for(int x = 0;x <= (op.length() - 1);x++) {
-			crctr  = op.charAt(x);	
-			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!' || crctr == '|') {
+			crctr  = op.charAt(x);
+			
+			if (crctr == ' ') {
+				opArr = op.split(Character.toString(crctr));
+				op = null;
+				for(int n = 0;n <= (opArr.length - 1);n++) {
+					if (op == null) {
+						op = opArr[n];
+					} else {
+						op = op + opArr[n];
+					}
+				}
+				x = 0;
+			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!' || crctr == '|') {
 				opr = String.valueOf(crctr);
 			} else {
 				for (byte i = 65;i <= 90;i++) {
