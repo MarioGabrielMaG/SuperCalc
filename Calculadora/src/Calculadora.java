@@ -113,6 +113,9 @@ public class Calculadora {
 		case "^": 
 			opArr = op.split("\\^");
 			break;
+		case "|": 
+			opArr = op.split("\\|");
+			break;
 		default:
 			opArr = op.split(opr);
 			break;
@@ -181,7 +184,7 @@ public class Calculadora {
 	public static String identif(String op){ 
 		for(int x = 0;x <= (op.length() - 1);x++) {
 			crctr  = op.charAt(x);	
-			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') {
+			if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!' || crctr == '|') {
 				opr = String.valueOf(crctr);
 			} else {
 				for (byte i = 65;i <= 90;i++) {
