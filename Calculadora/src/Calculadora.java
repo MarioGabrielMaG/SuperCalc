@@ -46,7 +46,7 @@ public class Calculadora {
 			Ayuda();
 			break;
 		default:
-			Operaciones(op);
+			Operaciones();
 		}
 	}
 	
@@ -100,8 +100,9 @@ public class Calculadora {
 		System.out.println("*Vuelva al menú para operar*");	
 	}
 	
-	public static void Operaciones(String op) {	//filtramos la operación recibida por el usuario
-		opr = identif(op);
+	public static void Operaciones() {	//filtramos la operación recibida por el usuario
+		opr = identif();
+		opArr = new String[0];
 		
 		switch(opr){
 		case "+": 
@@ -180,10 +181,10 @@ public class Calculadora {
 	
 	/**
 	 * Identificar el tipo de operacion solicitada
-	 * @param String op
 	 * @return String opr
 	 */
-	public static String identif(String op){ 
+	public static String identif(){ 
+		opr = null;
 		for(int x = 0;x <= (op.length() - 1);x++) {
 			crctr  = op.charAt(x);
 			
@@ -198,19 +199,11 @@ public class Calculadora {
 					}
 				}
 				x = 0;
+				opr = null;
 			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!' || crctr == '|') {
 				opr = String.valueOf(crctr);
 			} else {
 				for (byte i = 65;i <= 90;i++) {
-					if (i == (int) crctr) {
-						if (opr != null) {
-							opr = opr + crctr;
-						} else {
-							opr = Character.toString(crctr);
-						}
-					}
-				}
-				for (byte i = 97;i <= 122;i++) {
 					if (i == (int) crctr) {
 						if (opr != null) {
 							opr = opr + crctr;
