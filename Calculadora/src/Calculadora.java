@@ -104,6 +104,8 @@ public class Calculadora {
 		opr = identif();
 		opArr = new String[0];
 		
+		op = op.split("\r")[0];
+		
 		switch(opr){
 		case "+": 
 			opArr = op.split("\\+");
@@ -114,16 +116,24 @@ public class Calculadora {
 		case "^": 
 			opArr = op.split("\\^");
 			break;
-		case "|": 
-			opArr = op.split("\\|");
-			break;
 		default:
 			opArr = op.split(opr);
 			break;
 		}
 		
-		op2 = Integer.parseInt(opArr[1].split("\r")[0]);
-		op1 = Integer.parseInt(opArr[0]);
+		if (opArr.length > 1) {
+			if (opArr[1] == "") {
+				op2 = 0;
+			} else {
+				op2 = Integer.parseInt(opArr[1]);
+			}
+		}
+		
+		if (opArr[0] == "") {
+			op1 = 0;
+		} else {
+			op1 = Integer.parseInt(opArr[0]);
+		}
 		
 		switch (opr) {
 			case "+":
@@ -140,7 +150,6 @@ public class Calculadora {
 				break;
 			case "%":
 			case "MOD":
-			case "||":
 				modulo();
 				break;
 			case "SQRT":
@@ -179,6 +188,7 @@ public class Calculadora {
 		
 	}
 	
+	
 	/**
 	 * Identificar el tipo de operacion solicitada
 	 * @return String opr
@@ -198,9 +208,9 @@ public class Calculadora {
 						op = op + opArr[n];
 					}
 				}
-				x = 0;
+				x = -1;
 				opr = null;
-			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!' || crctr == '|') {
+			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') {
 				opr = String.valueOf(crctr);
 			} else {
 				for (byte i = 65;i <= 90;i++) {
@@ -232,24 +242,50 @@ public class Calculadora {
 		
 	}
 	
+	/**
+	 * Calculo del arcoseno del ángulo especificado.
+	 * @param
+	 */
 	public static void arcseno() {
 		
 		
 	}
 	
+	/**
+	 * Calculo de la tangente del ángulo especificado.
+	 * @param
+	 */
 	public static void tangente() {
-		
-		
+		if (op2 != 0) {
+			System.out.printf("%.2f %n", Math.tan(op2));
+		} else if (op1 != 0) {
+			System.out.printf("%.2f %n", Math.tan(op1));
+		}
 	}
 	
+	/**
+	 * Calculo del Coseno del ángulo especificado en radianes.
+	 * @param
+	 */
 	public static void coseno() {
-		
-		
+		if (op2 != 0) {
+			System.out.printf("%.2f %n", Math.cos(op2));
+		} else if (op1 != 0) {
+			System.out.printf("%.2f %n", Math.cos(op1));
+		}
 	}
 	
+	/**
+	 * Calculo del Seno del ángulo especificado en radianes.
+	 * @param
+	 */
 	public static void seno() {
-		
-		
+		if (op2 != 0) {
+			System.out.printf("%.2f %n", Math.sin(op2));
+		} else if (op1 != 0) {
+			System.out.printf("%.2f %n", Math.sin(op1));
+		}
+		menu();
 	}
 	
 	public static void potencia() {
