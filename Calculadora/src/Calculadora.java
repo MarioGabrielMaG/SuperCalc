@@ -237,18 +237,32 @@ public class Calculadora {
 		
 	}
 	
+	/**
+	 * Calculo del ArcCoseno del ángulo especificado.
+	 * @param
+	 */
 	public static void arcos() {
-		
-		
+		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
+			System.out.printf("%.2f %n", Math.acos(op2)); // Realizamos le ArcCoseno sobre op2
+		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
+			System.out.printf("%.2f %n", Math.acos(op1)); // Realizamos le ArcCoseno sobre op1
+		} else {
+			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
+		}
 	}
 	
 	/**
-	 * Calculo del arcoseno del ángulo especificado.
+	 * Calculo del ArcSeno del ángulo especificado.
 	 * @param
 	 */
 	public static void arcseno() {
-		
-		
+		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
+			System.out.printf("%.2f %n", Math.asin(op2)); // Realizamos le ArcSeno sobre op2
+		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
+			System.out.printf("%.2f %n", Math.asin(op1)); // Realizamos le ArcSeno sobre op1
+		} else {
+			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
+		}
 	}
 	
 	/**
