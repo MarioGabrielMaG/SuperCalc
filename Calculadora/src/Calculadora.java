@@ -232,6 +232,10 @@ public class Calculadora {
 		
 	}
 	
+	/**
+	 * Función que indica cual de los dos numeros es menor.
+	 * @param
+	 */
 	public static void mayornum() {
 		
 		
