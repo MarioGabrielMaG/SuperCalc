@@ -14,22 +14,26 @@ public class Calculadora {
 	
 	//Variables globales.
 	static String op; //Operación 
-	static float res; //resultado
-	static float op1; //Primer Operando
-	static float op2; //Segundo Operando
+	static double res; //resultado
+	static double op1; //Primer Operando
+	static double op2; //Segundo Operando
 	static String opr;//Operador
 	static char crctr; //Caracter cualquiera
 	static String num; //Número cualquiera
 	static String opArr[]; //Almacena un array con la operacion dividida en operandos
-	static boolean ejec; // Booleano que controla la ejecución del programa
+	static boolean ejec = true; // Booleano que controla la ejecución del programa
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {	
+		/*
+		 * Ejecutamos el programa en bucle, para que el usuario pueda meter otra 
+		 * operacion sin tener que volver a ejecutar el programa
+		 */
 		do {
 			menu();
-		} while(!ejec);
+		} while(ejec); // si "ejec" es True, sigue ejecutando.
 	}
 	
 	public static void menu() {
@@ -41,6 +45,8 @@ public class Calculadora {
 		System.out.print("> ");
 		op = inp.next().toUpperCase();
 		
+		op = op.split("\r")[0];
+		
 		switch (op){
 		case "A":
 			ListaOperaciones();
@@ -48,8 +54,8 @@ public class Calculadora {
 		case "B": 
 			Ayuda();
 			break;
-		case "C": 
-			ejec = false;
+		case "C": // En el caso de que el usuario escoja la opcion "C" Salir  
+			ejec = false; // inicializamos ejec a False para salir de la ejecución
 			break;
 		default:
 			Operaciones();
@@ -107,38 +113,61 @@ public class Calculadora {
 	}
 	
 	public static void Operaciones() {	//filtramos la operación recibida por el usuario
-		opr = identif();
-		opArr = new String[0];
+		opr = identif(); // Analizamos la operación introducida por el usuario en busca del operador.
+		opArr = new String[0]; // inicializamos el Array que contendra los operadores 
 		
-		op = op.split("\r")[0];
-		
+		/*
+		 * En el caso que el operador introducido por el usuario sea uno de 
+		 * estos carácteres:
+		 * 		('+','*' ó '^')
+		 * sustituimos su cadena por su caracter aritmetico correspondiente.
+		 * 
+		 * De esta manera, podemos dividir la operación desde el operador, obteniendo 
+		 * el primer y segundo operando (siempre y cuando se respete la sintaxis 
+		 * matematica correspondiente).
+		 * 
+		 * En el caso de que sea cualquier otro carácter, realizamos el Split con el operador
+		 * en su formato String
+		 */
 		switch(opr){
-		case "+": 
-			opArr = op.split("\\+");
+		case "+": // si el operador es '+'
+			opArr = op.split("\\+"); // Lo sustituimos por '\\+' y dividimos la cadena
 			break;
-		case "*": 
-			opArr = op.split("\\*");
+		case "*": // Si el operador es '*'
+			opArr = op.split("\\*"); // Lo sustituimos por '\\*' y dividimos la cadena
 			break;
-		case "^": 
-			opArr = op.split("\\^");
+		case "^": // Si el operador es '^'
+			opArr = op.split("\\^"); // Lo sustituimos por '\\^' y dividimos la cadena
 			break;
-		default:
-			opArr = op.split(opr);
+		default: // En cualquier otro caso
+			opArr = op.split(opr); // Dividimos la cadena
 			break;
 		}
 		
-		if (opArr.length > 1) {
-			if (opArr[1] == "") {
-				op2 = 0;
-			} else {
-				op2 = Integer.parseInt(opArr[1]);
+		/*
+		 * Tratamiento del segundo operador
+		 * 
+		 * Si el Array que contiene los operadores, contiene mas de 1 operador, 
+		 * significa que el operador dos existe, por lo que comprobamos su contenido,
+		 * si este esta vacío, movemos '0'. 
+		 */
+		if (opArr.length > 1) { //Si hay mas de una variable en el array
+			if (opArr[1] == "") { // evaluamos si la segunda variable contiene datos
+				op2 = 0; //si no contiene datos movemos '0'
+			} else { // si contiene datos
+				op2 = Integer.parseInt(opArr[1]); // Movemos el valor del array 
 			}
 		}
 		
-		if (opArr[0] == "") {
-			op1 = 0;
-		} else {
-			op1 = Integer.parseInt(opArr[0]);
+		/*
+		 * Tratamiento del Primer operador
+		 *
+		 * si el primer operador esta vacío, movemos '0'. 
+		 */
+		if (opArr[0] == "") {// Si esta vacío
+			op1 = 0; // movemos '0'
+		} else { // si no
+			op1 = Integer.parseInt(opArr[0]); // Movemos el valor del array
 		}
 		
 		switch (opr) {
@@ -155,7 +184,7 @@ public class Calculadora {
 				división();
 				break;
 			case "%":
-			case "MOD":
+			case "MOD": // si el operador es "MOD" significa que quiere calcular el módulo
 				modulo();
 				break;
 			case "SQRT":
@@ -194,6 +223,24 @@ public class Calculadora {
 		
 	}
 	
+	/**
+	 * Función que sustituye el formato decimal con el separador ',' (coma), por el formato con el separador '.' (punto)
+	 * @param String num //Número real con el separador ',' (coma)
+	 * @return Double //Número real con el separador '.' (punto) 
+	 */
+	public static Double suspc(String num) {
+		/*
+		 * Realizamos un 'For' para recorrer el número en busca del carácter coma (',')
+		 */
+		for(int i = 0;i <= (num.length() - 1);i++) { // Contamos desde 0 hasta el número máximo de carácteres que contiene sumando uno cada vez
+			char comma = num.charAt(i); // Recogemos el carácter actual del string
+			
+			if(comma == ',') { // Si el carácter actual es una coma (',')
+				num = num.replace(',','.'); // Lo reemplazamos por punto
+			}
+		}
+		return Double.parseDouble(num); // Retornamos como Double el número obtenido con el punto como separador de décimales
+	}
 	
 	/**
 	 * Identificar el tipo de operacion solicitada
@@ -314,6 +361,7 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void seno() {
+		op2 = suspc(Double.toString(op2));
 		if (op2 != 0) {
 			System.out.printf("%.2f %n", Math.sin(op2));
 		} else if (op1 != 0) {
