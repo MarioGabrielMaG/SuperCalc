@@ -21,20 +21,23 @@ public class Calculadora {
 	static char crctr; //Caracter cualquiera
 	static String num; //Número cualquiera
 	static String opArr[]; //Almacena un array con la operacion dividida en operandos
+	static boolean ejec; // Booleano que controla la ejecución del programa
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {	
-		menu();
+		do {
+			menu();
+		} while(!ejec);
 	}
 	
 	public static void menu() {
-		System.out.println("***********************************");
-		System.out.println("* A -Lista Operaciones  B - Ayuda *");
-		System.out.println("*                o                *");
-		System.out.println("*    -Introduce una operación-    *");
-		System.out.println("***********************************");
+		System.out.println("**********************************************");
+		System.out.println("* A -Lista Operaciones  B - Ayuda  C - salir *");
+		System.out.println("*                     o                      *");
+		System.out.println("*         -Introduce una operación-          *");
+		System.out.println("**********************************************");
 		System.out.print("> ");
 		op = inp.next().toUpperCase();
 		
@@ -44,6 +47,9 @@ public class Calculadora {
 			break;
 		case "B": 
 			Ayuda();
+			break;
+		case "C": 
+			ejec = false;
 			break;
 		default:
 			Operaciones();
@@ -227,18 +233,28 @@ public class Calculadora {
 		return opr;
 	}
 	
-	public static void menornum() {
-		
-		
-	}
-	
 	/**
 	 * Función que indica cual de los dos numeros es menor.
 	 * @param
 	 */
+	public static void menornum() {
+		if (op1 > op2) {
+			System.out.println(op2 + " es Menor que " + op1); //en el caso de que op1 sea mayor que op2
+		} else {
+			System.out.println(op1 + " es Menor que " + op2); //en el caso de que op2 sea mayor que op1
+		}
+	}
+	
+	/**
+	 * Función que indica cual de los dos numeros es mayor.
+	 * @param
+	 */
 	public static void mayornum() {
-		
-		
+		if (op1 > op2) {
+			System.out.println(op1 + " es Mayor que " + op2); //en el caso de que op1 sea mayor que op2
+		} else {
+			System.out.println(op2 + " es Mayor que " + op1); //en el caso de que op2 sea mayor que op1
+		}
 	}
 	
 	/**
@@ -303,7 +319,6 @@ public class Calculadora {
 		} else if (op1 != 0) {
 			System.out.printf("%.2f %n", Math.sin(op1));
 		}
-		menu();
 	}
 	
 	public static void potencia() {
