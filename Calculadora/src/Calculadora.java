@@ -243,41 +243,52 @@ public class Calculadora {
 	}
 	
 	/**
-	 * Identificar el tipo de operacion solicitada
+	 * Identificar el tipo de operacion solicitada.
 	 * @return String opr
 	 */
 	public static String identif(){ 
-		opr = null;
+		opr = null; // inicializamos el operador a Null ya que introduciremos un dato nuevo en el 
+		
+		/*
+		 * Recorremos la cadena introducida por el usuario caracter a caracter 
+		 * en busca del operando. 
+		 */
 		for(int x = 0;x <= (op.length() - 1);x++) {
-			crctr  = op.charAt(x);
+			crctr  = op.charAt(x); //movemos el caracter actual a la variable caracter
 			
-			if (crctr == ' ') {
-				opArr = op.split(Character.toString(crctr));
-				op = null;
+			if (crctr == ' ') { // si el caracter actual es un espacio
+				opArr = op.split(Character.toString(crctr)); // hacemos un Split para separar el resto de caracteres de los espacios similares al almacenado en la variable caracter
+				op = null; // movemos null a la variable operacion 
+				/*
+				 * Recorremos el Array resultante de la separacion del String con Split
+				 */
 				for(int n = 0;n <= (opArr.length - 1);n++) {
-					if (op == null) {
-						op = opArr[n];
-					} else {
-						op = op + opArr[n];
+					if (op == null) { // si la variable operacion no contiene ningun caracter 
+						op = opArr[n]; // movemos el primer caracter del array
+					} else { // sino
+						op = op + opArr[n]; // movemos el caracter del array concatenado con el intrpducido anteriormente
 					}
 				}
-				x = -1;
-				opr = null;
-			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') {
-				opr = String.valueOf(crctr);
-			} else {
-				for (byte i = 65;i <= 90;i++) {
-					if (i == (int) crctr) {
-						if (opr != null) {
-							opr = opr + crctr;
-						} else {
-							opr = Character.toString(crctr);
+				x = -1; // inicializamos a -1 la variable contador de la lectura del String introducido por el usuario para que empieze a leer el String desde el principio, ya que esta ha cambiado habiendo quitado los espacios 
+				opr = null; // Inicializamos a null la variable operador
+			} else if(crctr == '+' || crctr == '-' || crctr == '*' || crctr == '/' || crctr == '>' || crctr == '<' || crctr == '^' || crctr == '%' || crctr == '!') { // Sino, si el caracter leido, corresponde con uno de los operadores matemáticos tradicionales
+				opr = String.valueOf(crctr); // movemos el caracter a la variable operador
+			} else { // sino
+				/*
+				 * recorremos los caracteres ASCII del abecedario en Mayusculas en busca de una coincidencia con el caracter encontrado en la operación solicitada por el usuario
+				 */
+				for (byte i = 65;i <= 90;i++) {  
+					if (i == (int) crctr) { // Si Existe coincidencia
+						if (opr != null) { // Si el caracter Operador no esta vacío
+							opr = opr + crctr; // concatenamos el caracter con el carácter anterior de la cadena operador
+						} else { // sino
+							opr = Character.toString(crctr); // introducimos el caracter en la variable operador
 						}
 					}
 				}
 			}
 		}
-		return opr;
+		return opr; // Retornamos el operador.
 	}
 	
 	/**
@@ -285,9 +296,11 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void menornum() {
-		if (op1 > op2) {
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
+		if (op1 > op2) { // si op1 es mayor que op2
 			System.out.println(op2 + " es Menor que " + op1); //en el caso de que op1 sea mayor que op2
-		} else {
+		} else { // sino
 			System.out.println(op1 + " es Menor que " + op2); //en el caso de que op2 sea mayor que op1
 		}
 	}
@@ -297,9 +310,11 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void mayornum() {
-		if (op1 > op2) {
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
+		if (op1 > op2) { // si op1 es mayor que op2
 			System.out.println(op1 + " es Mayor que " + op2); //en el caso de que op1 sea mayor que op2
-		} else {
+		} else { // sino
 			System.out.println(op2 + " es Mayor que " + op1); //en el caso de que op2 sea mayor que op1
 		}
 	}
@@ -309,11 +324,13 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void arcos() {
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			System.out.printf("%.2f %n", Math.acos(op2)); // Realizamos le ArcCoseno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
 			System.out.printf("%.2f %n", Math.acos(op1)); // Realizamos le ArcCoseno sobre op1
-		} else {
+		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
 		}
 	}
@@ -323,11 +340,13 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void arcseno() {
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			System.out.printf("%.2f %n", Math.asin(op2)); // Realizamos le ArcSeno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
 			System.out.printf("%.2f %n", Math.asin(op1)); // Realizamos le ArcSeno sobre op1
-		} else {
+		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
 		}
 	}
@@ -337,10 +356,12 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void tangente() {
-		if (op2 != 0) {
-			System.out.printf("%.2f %n", Math.tan(op2));
-		} else if (op1 != 0) {
-			System.out.printf("%.2f %n", Math.tan(op1));
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
+		if (op2 != 0) { // si el operador 2 es distinto de 0
+			System.out.printf("%.2f %n", Math.tan(op2)); // realizamos la operación sobre el segundo operando
+		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
+			System.out.printf("%.2f %n", Math.tan(op1)); // realizamos la operacion sobre el primer operando
 		}
 	}
 	
@@ -349,10 +370,12 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void coseno() {
-		if (op2 != 0) {
-			System.out.printf("%.2f %n", Math.cos(op2));
-		} else if (op1 != 0) {
-			System.out.printf("%.2f %n", Math.cos(op1));
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
+		if (op2 != 0) { // si el operador 2 es distinto de 0
+			System.out.printf("%.2f %n", Math.cos(op2)); // realizamos la operación sobre el segundo operando
+		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
+			System.out.printf("%.2f %n", Math.cos(op1)); // realizamos la operacion sobre el primer operando
 		}
 	}
 	
@@ -361,11 +384,12 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void seno() {
-		op2 = suspc(Double.toString(op2));
-		if (op2 != 0) {
-			System.out.printf("%.2f %n", Math.sin(op2));
-		} else if (op1 != 0) {
-			System.out.printf("%.2f %n", Math.sin(op1));
+		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
+		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
+		if (op2 != 0) { // si el operador 2 es distinto de 0
+			System.out.printf("%.2f %n", Math.sin(op2)); // realizamos la operación sobre el segundo operando
+		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
+			System.out.printf("%.2f %n", Math.sin(op1)); // realizamos la operacion sobre el primer operando
 		}
 	}
 	
