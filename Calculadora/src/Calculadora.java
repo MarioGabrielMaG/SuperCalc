@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 
 /**
@@ -10,10 +9,9 @@ import javax.swing.*;
  * @author Juan Álvarez
  */
 public class Calculadora {
-	//Input 
-
-	
-	//Variables globales.
+	/*
+	 * Variables globales.
+	 */
 	static String op; //Operación 
 	static double res; //resultado
 	static double op1; //Primer Operando
@@ -26,7 +24,8 @@ public class Calculadora {
 	static int selector = 0; //Selector para las opciones de JOptionPanel
 	
 	/**
-	 * @param args
+	 * Funcion primaria del programa
+	 * @param args String[]
 	 */
 	public static void main(String[] args) {	
 		/*
@@ -40,23 +39,24 @@ public class Calculadora {
 	
 	public static void firstDialog() {
 		selector = JOptionPane.showOptionDialog( null,"Seleccione opcion",  "Selector de opciones",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-			null,new Object[] { "Operar", "Operaciones Disponibles", "Salir" }, null);
+			null,new Object[] { "Operar", "operaciones Disponibles", "Salir" }, null);
+		
 		switch(selector){
 		case 0:
 			escritorOperacion();
 			break;
 		case 1:
-			listaOperaciones();
+			listaoperaciones();
 			break;
 		case 2:
 			ejec = false; // inicializamos ejec a False para salir de la ejecución
 			break;
-	}
+		}
 	}
 	
 
 	
-	public static void listaOperaciones() { //menú de operaciones	
+	public static void listaoperaciones() { //menú de operaciones	
 		selector = JOptionPane.showOptionDialog( null,"Las operaciónes disponibles son:\n"+
 				"---------------------------------\n"+
 				">Suma (+)\n"+
@@ -73,8 +73,9 @@ public class Calculadora {
 				">Arcoseno (ARCSEN)\n"+
 				">Arcocoseno (ARCOS)\n"+
 				">Mayor número (>)\n"+
-				">Menor número (<)\n",  "Lista de Operaciones",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				">Menor número (<)\n",  "Lista de operaciones",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null,new Object[] { "Operar","Volver al menú","Más ayuda" }, null);
+		
 		switch(selector){
 		case 0:
 			escritorOperacion();
@@ -85,7 +86,7 @@ public class Calculadora {
 		case 2:
 			Ayuda();
 			break;
-	}
+		}
 		
 	}
 	
@@ -106,7 +107,7 @@ public class Calculadora {
 				"*Arcoseno (A ARCSEN = Arcseno de A)\n"+
 				"*Arcocoseno (A ARCOS = Arcoseno de A)\n"+
 				"*Mayor número (A>B = mayor número entre A y B)\n"+
-				"*Menor número (A<B = menor número entre A y B)",  "Uso de Operaciones",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				"*Menor número (A<B = menor número entre A y B)",  "Uso de operaciones",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null,new Object[] { "Operar","Volver al menú"}, null);
 		switch(selector){
 		case 0:
@@ -123,12 +124,10 @@ public class Calculadora {
 		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE); 
 				      
 		op = op.split("\r")[0];
-		Operaciones();
-		
-		
+		operaciones();
 	}
 	
-	public static void Operaciones() {	//filtramos la operación recibida por el usuario
+	public static void operaciones() {	//filtramos la operación recibida por el usuario
 		opr = identif(); // Analizamos la operación introducida por el usuario en busca del operador.
 		opArr = new String[0]; // inicializamos el Array que contendra los operadores 
 		
