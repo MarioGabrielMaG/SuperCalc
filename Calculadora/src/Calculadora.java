@@ -121,9 +121,7 @@ public class Calculadora {
 
 	}
 	public static void escritorOperacion() {
-		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE); 
-				      
-		op = op.split("\r")[0];
+		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE).toUpperCase();       
 		operaciones();
 	}
 	
@@ -170,7 +168,7 @@ public class Calculadora {
 			if (opArr[1] == "") { // evaluamos si la segunda variable contiene datos
 				op2 = 0; //si no contiene datos movemos '0'
 			} else { // si contiene datos
-				op2 = Integer.parseInt(opArr[1]); // Movemos el valor del array 
+				op2 = suspc(opArr[1]); // Movemos el valor del array 
 			}
 		}
 		
@@ -182,7 +180,7 @@ public class Calculadora {
 		if (opArr[0] == "") {// Si esta vacío
 			op1 = 0; // movemos '0'
 		} else { // si no
-			op1 = Integer.parseInt(opArr[0]); // Movemos el valor del array
+			op1 = suspc(opArr[0]); // Movemos el valor del array
 		}
 		
 		switch (opr) {
@@ -311,8 +309,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void menornum() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op1 > op2) { // si op1 es mayor que op2
 			selector = JOptionPane.showOptionDialog( null,op2 +" es menor que "+op1,  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
@@ -330,24 +326,21 @@ public class Calculadora {
 					break;
 			}
 		
-			
 		} else { // sino
 			selector = JOptionPane.showOptionDialog( null,op1 +" es menor que "+op2,  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
 				
-				
-				switch(selector){
-					case 0:
-						escritorOperacion();
-						break;
-					case 1:
-						escritorOperacion();
-						break;
-					case 2:
-						firstDialog();
-						break;
-				}
-			
+			switch(selector){
+				case 0:
+					escritorOperacion();
+					break;
+				case 1:
+					escritorOperacion();
+					break;
+				case 2:
+					firstDialog();
+					break;
+			}
 		}
 	}
 	
@@ -356,8 +349,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void mayornum() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op1 > op2) { // si op1 es mayor que op2
 			selector = JOptionPane.showOptionDialog( null,op1 +" es mayor que "+op2,  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
@@ -402,8 +393,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void arcos() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			res = Math.acos(op2); 
 			respuesta();// Realizamos le ArcCoseno sobre op2
@@ -422,8 +411,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void arcseno() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			res = Math.asin(op2); 
 			respuesta();// Realizamos le ArcSeno sobre op2
@@ -442,8 +429,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void tangente() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // si el operador 2 es distinto de 0
 			res = Math.tan(op2); // realizamos la operación sobre el segundo operando
 			respuesta();
@@ -460,8 +445,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void coseno() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // si el operador 2 es distinto de 0		
 			res = Math.cos(op2); // realizamos la operación sobre el segundo operando
 			respuesta();
@@ -478,8 +461,6 @@ public class Calculadora {
 	 * @param
 	 */
 	public static void seno() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		if (op2 != 0) { // si el operador 2 es distinto de 0
 			res = Math.sin(op2);
 			respuesta();// realizamos la operación sobre el segundo operando
@@ -492,8 +473,6 @@ public class Calculadora {
 	}
 	
 	public static void potencia() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		res =(float)Math.pow(op1,op2);
 		respuesta();
 		
@@ -501,8 +480,6 @@ public class Calculadora {
 	}
 	
 	public static void factorial() {
-		op2 = suspc(Double.toString(op2)); // sustituimos la coma por punto en el decimal si este existiera
-		op1 = suspc(Double.toString(op1)); // sustituimos la coma por punto en el decimal si este existiera
 		for(int a = 1 ; a<op2 ; a++) {
 			if(a ==1) {
 			res = op2 * (op2-1);
