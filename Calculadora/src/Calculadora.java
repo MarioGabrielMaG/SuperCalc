@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import javax.swing.*;
 
 /**
@@ -24,6 +25,7 @@ public class Calculadora {
 	static String opArr[]; // Almacena un array con la operacion dividida en operandos
 	static boolean ejec = true; // Booleano que controla la ejecución del programa
 	static int selector = 0; //Selector para las opciones de JOptionPanel
+	static DecimalFormat frmt = new DecimalFormat("#.#####"); // Malla para el formateo de decimales
 	
 	/**
 	 * Funcion primaria del programa
@@ -336,20 +338,6 @@ public class Calculadora {
 	}
 	
 	/**
-	 * Funcion que formatea numeros quitando o poniendo decimales, según corresponda
-	 * @param String s
-	 * @return String
-	 */
-	private static String format(String s) {
-		String[] splt = s.split("\\."); // divide el Double a un array String, poniendo en el indice 0 el numero entero y en el indice 1 los decimales
-		if (Integer.parseInt(splt[1]) == 0) { // si el incide 1 es igual a cero, significa que el numero no tiene decimales
-			return String.format("%d", Integer.parseInt(splt[0])); // devolvemos la numeracion sin decimales
-		} else { // si no
-			return String.format("%f", Double.parseDouble(s)); // devolvemos la numeracion con decimales
-		}
-	}
-	
-	/**
 	 * Función que indica cual de los dos numeros es menor.
 	 * @param
 	 */
@@ -365,7 +353,7 @@ public class Calculadora {
 			 * 	> Salir al menú -> Valor '2'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
-												    format(String.valueOf(op2)) + " es menor que " + format(String.valueOf(op1)), //Resultado de la operación
+													frmt.format(op2) + " es menor que " + frmt.format(op1), //Resultado de la operación
 												    "Resultado de la operación", //Titulo de la ventana
 												    JOptionPane.YES_NO_CANCEL_OPTION,//Tipo de opciones a mostrar
 												    JOptionPane.QUESTION_MESSAGE,//Tipo de mensaje
@@ -389,7 +377,7 @@ public class Calculadora {
 			 * 	> Salir al menú -> Valor '2'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
-													format(String.valueOf(op1)) + " es menor que " + format(String.valueOf(op2)), //Resultado de la operación
+													frmt.format(op1) + " es menor que " + frmt.format(op2), //Resultado de la operación
 												    "Resultado de la operación", //Titulo de la ventana
 												    JOptionPane.YES_NO_CANCEL_OPTION,//Tipo de opciones a mostrar
 												    JOptionPane.QUESTION_MESSAGE,//Tipo de mensaje
@@ -441,7 +429,7 @@ public class Calculadora {
 			 * 	> Salir al menú -> Valor '2'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
-													format(String.valueOf(op1)) + " es mayor que " + format(String.valueOf(op2)), //Resultado de la operación
+													frmt.format(op1) + " es mayor que " + frmt.format(op2), //Resultado de la operación
 												    "Resultado de la operación", //Titulo de la ventana
 												    JOptionPane.YES_NO_CANCEL_OPTION,//Tipo de opciones a mostrar
 												    JOptionPane.QUESTION_MESSAGE,//Tipo de mensaje
@@ -466,7 +454,7 @@ public class Calculadora {
 			 * 	> Salir al menú -> Valor '2'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
-													format(String.valueOf(op2)) + " es mayor que " + format(String.valueOf(op1)), //Resultado de la operación
+													frmt.format(op2) + " es mayor que " + frmt.format(op1), //Resultado de la operación
 												    "Resultado de la operación", //Titulo de la ventana
 												    JOptionPane.YES_NO_CANCEL_OPTION,//Tipo de opciones a mostrar
 												    JOptionPane.QUESTION_MESSAGE,//Tipo de mensaje
@@ -656,14 +644,14 @@ public class Calculadora {
 	
 	public static void respuesta() {
 		if(op1 != 0 && op2 != 0) {
-			selector = JOptionPane.showOptionDialog( null,format(String.valueOf(op1)) + opr + format(String.valueOf(op2)) + "=" + format(String.valueOf(res)),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + opr + frmt.format(op2) + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
 		}
 		else if (op2 == 0){
-			selector = JOptionPane.showOptionDialog( null,format(String.valueOf(op1)) + opr + "=" + format(String.valueOf(res)),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + opr + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
 		} else {
-			selector = JOptionPane.showOptionDialog( null,opr + format(String.valueOf(op2)) + "=" + format(String.valueOf(res)),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+			selector = JOptionPane.showOptionDialog( null,opr + frmt.format(op2) + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
 		}
 		switch(selector){
@@ -677,8 +665,5 @@ public class Calculadora {
 				firstDialog();
 				break;
 		}
-	
-	
-
 	}
 }
