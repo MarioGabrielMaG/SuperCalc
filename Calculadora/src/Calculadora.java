@@ -293,24 +293,32 @@ public class Calculadora {
 														   	  "Volver al menú", // Botón "Volver al menú"
 														     }, 
 												null);
-		
+		/*
+		 * Evaluamos el valor retornado "selector"
+		 */
 		switch(selector){
-			case 0:
-				escritorOperacion();
+			case 0: // En el caso de que sea "0", significa que el usuario a pulsado la opcion "Operar"
+				escritorOperacion(); // llamamos a la función escritorOperación();
 				break;
-			case 1:
-				firstDialog();
+			case 1: // En el caso de que sea "1", significa que el usuario a pulsado la opcion "Volver al menú"
+				firstDialog(); // llamamos a la función firstDialog();
 				break;
 		}
 
 	}
 	
+	/*
+	 * función que muestra un input para que el usuario pueda introducir la operación
+	 */
 	public static void escritorOperacion() {
 		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE).toUpperCase();       
 		operaciones();
 	}
 	
-	public static void operaciones() {	//filtramos la operación recibida por el usuario
+	/*
+	 * Funcion que identifica el tipo de operando introducido por el usuario en la operación 
+	 */
+	public static void operaciones() {	// filtramos la operación recibida por el usuario
 		opr = identif(); // Analizamos la operación introducida por el usuario en busca del operador.
 		opArr = new String[0]; // inicializamos el Array que contendra los operadores 
 		
@@ -371,54 +379,57 @@ public class Calculadora {
 			op1 = suspc(opArr[0]); // Movemos el valor del array
 		}
 		
+		/*
+		 * Switch diseñado paera deribar a una operacion u otra dependiendo el operando introducido
+		 */
 		switch (opr) {
-			case "+":
+			case "+": // para suma, llamamos a suma();
 				suma();
 				break;
-			case "-":
+			case "-": // para resta, llamamos a resta();
 				resta();
 				break;
-			case "*":
+			case "*": // para multiplicación, llamamos a multioplicación();
 				multiplicacion();
 				break;
-			case "/":
+			case "/": // para división, llamamos a división();
 				división();
 				break;
-			case "%":
+			case "%": // para modulo, llamamos a modulo();
 			case "MOD": // si el operador es "MOD" significa que quiere calcular el módulo
 				modulo();
 				break;
-			case "SQRT":
+			case "SQRT": // para raiz, llamamos a raiz();
 				raiz();
 				break;
-			case "!":
+			case "!": // para factorial, llamamos a factorial();
 				factorial();
 				break;
-			case "^":
+			case "^": // para potencia, llamamos a potencia();
 				potencia();
 				break;
-			case "SEN":
+			case "SEN":// para seno, llamamos a seno();
 				seno();
 				break;
-			case "COS":
+			case "COS":// para coseno, llamamos a coseno();
 				coseno();
 				break;
-			case "TAN":
+			case "TAN": // para tangente, llamamos a tangente();
 				tangente();
 				break;
-			case "ARCSEN":
+			case "ARCSEN": // para arcseno, llamamos a arcseno();
 				arcseno();
 				break;
-			case "ARCOS":
+			case "ARCOS": // para arcoseno, llamamos a arcos();
 				arcos();
 				break;
-			case ">":
+			case ">": // para mayor numeración, llamamos a mayornum();
 				mayornum();
 				break;
-			case "<":
+			case "<": // para menor numeración, llamamos a menornum();
 				menornum();
 				break;
-			default:
+			default: // para cualquier otro caso, mostramos error operacion no soportada y volvemos a pedir el dato
 				JOptionPane.showMessageDialog(null, "ERROR: Operación " + opr + " no soportada, introduzca otro valor", "Error en ejecución", JOptionPane.ERROR_MESSAGE);
 				escritorOperacion();
 		}
@@ -505,8 +516,7 @@ public class Calculadora {
 			 * Mostramos el resultado en un cuadro de dialogo con los botones:
 			 * 
 			 * 	> Operar con nuevo valor -> Valor '0'
-			 * 	> Operar manteniendo valor -> Valor '1'
-			 * 	> Salir al menú -> Valor '2'
+			 * 	> Salir al menú -> Valor '1'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
 													frmt.format(op2) + " es menor que " + frmt.format(op1), //Resultado de la operación
@@ -518,7 +528,6 @@ public class Calculadora {
 												     * opciones
 												     */
 												    new Object[] {"Operar con nuevo valor", // Realizar otra operación 
-												    			  "Operar manteniendo valor", // Operar manteniendo el valor del resultado
 												    			  "Salir al menú" // Salir al menú principal
 																 }, 
 												    null);
@@ -529,8 +538,7 @@ public class Calculadora {
 			 * Mostramos el resultado en un cuadro de dialogo con los botones:
 			 * 
 			 * 	> Operar con nuevo valor -> Valor '0'
-			 * 	> Operar manteniendo valor -> Valor '1'
-			 * 	> Salir al menú -> Valor '2'
+			 * 	> Salir al menú -> Valor '1'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
 													frmt.format(op1) + " es menor que " + frmt.format(op2), //Resultado de la operación
@@ -542,7 +550,6 @@ public class Calculadora {
 												     * opciones
 												     */
 												    new Object[] {"Operar con nuevo valor", // Realizar otra operación 
-												    			  "Operar manteniendo valor", // Operar manteniendo el valor del resultado
 												    			  "Salir al menú" // Salir al menú principal
 																 }, 
 												    null);
@@ -553,17 +560,13 @@ public class Calculadora {
 		 * devuelve un valor numerico concreto:
 		 * 
 		 * 	> Operar con nuevo valor -> Valor '0'
-		 * 	> Operar manteniendo valor -> Valor '1'
-		 * 	> Salir al menú -> Valor '2'
+		 * 	> Salir al menú -> Valor '1'
 		 */
 		switch(selector){
 			case 0: // En el caso de haber seleccionado "Operar con nuevo valor"
 				escritorOperacion(); // llama a la función "escritorOperacion();"
 				break;
-			case 1: // En el caso de haber seleccionado "Operar manteniendo valor"
-		 //		OperAntFunc(); // llama a la función "OperAntFunc();" ### NO IMPLEMENTADO AÚN ###
-				break;
-			case 2: // En el caso de haber seleccionado "Salir al menú"
+			case 1: // En el caso de haber seleccionado "Salir al menú"
 				firstDialog(); // llama a la función "firstDialog();"
 				break;
 		}
@@ -581,8 +584,7 @@ public class Calculadora {
 			 * Mostramos el resultado en un cuadro de dialogo con los botones:
 			 * 
 			 * 	> Operar con nuevo valor -> Valor '0'
-			 * 	> Operar manteniendo valor -> Valor '1'
-			 * 	> Salir al menú -> Valor '2'
+			 * 	> Salir al menú -> Valor '1'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
 													frmt.format(op1) + " es mayor que " + frmt.format(op2), //Resultado de la operación
@@ -594,7 +596,6 @@ public class Calculadora {
 												     * opciones
 												     */
 												    new Object[] {"Operar con nuevo valor", // Realizar otra operación 
-												    			  "Operar manteniendo valor", // Operar manteniendo el valor del resultado
 												    			  "Salir al menú" // Salir al menú principal
 																 }, 
 												    null);
@@ -606,8 +607,7 @@ public class Calculadora {
 			 * Mostramos el resultado en un cuadro de dialogo con los botones:
 			 * 
 			 * 	> Operar con nuevo valor -> Valor '0'
-			 * 	> Operar manteniendo valor -> Valor '1'
-			 * 	> Salir al menú -> Valor '2'
+			 * 	> Salir al menú -> Valor '1'
 			 */
 			selector = JOptionPane.showOptionDialog(null,
 													frmt.format(op2) + " es mayor que " + frmt.format(op1), //Resultado de la operación
@@ -619,7 +619,6 @@ public class Calculadora {
 												     * opciones
 												     */
 												    new Object[] {"Operar con nuevo valor", // Realizar otra operación 
-												    			  "Operar manteniendo valor", // Operar manteniendo el valor del resultado
 												    			  "Salir al menú" // Salir al menú principal
 																 }, 
 												    null);
@@ -630,24 +629,20 @@ public class Calculadora {
 		 * devuelve un valor numerico concreto:
 		 * 
 		 * 	> Operar con nuevo valor -> Valor '0'
-		 * 	> Operar manteniendo valor -> Valor '1'
-		 * 	> Salir al menú -> Valor '2'
+		 * 	> Salir al menú -> Valor '1'
 		 */
 		switch(selector){
 			case 0: // En el caso de haber seleccionado "Operar con nuevo valor"
 				escritorOperacion(); // llama a la función "escritorOperacion();"
 				break;
-			case 1: // En el caso de haber seleccionado "Operar manteniendo valor"
-		 //		OperAntFunc(); // llama a la función "OperAntFunc();" ### NO IMPLEMENTADO AÚN ###
-				break;
-			case 2: // En el caso de haber seleccionado "Salir al menú"
+			case 1: // En el caso de haber seleccionado "Salir al menú"
 				firstDialog(); // llama a la función "firstDialog();"
 				break;
 		}
 	}
 	
 	/**
-	 * Calculo del ArcCoseno del ángulo especificado.
+	 * Calculo del ArcCoseno del ángulo en radianes especificado.
 	 * @param
 	 */
 	public static void arcos() {
@@ -655,9 +650,7 @@ public class Calculadora {
 			res = Math.acos(op2); 
 			respuesta();// Realizamos le ArcCoseno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
-			op2 = op1;
-			op1 = 0;	
-			res = Math.acos(op2); 
+			res = Math.acos(op1); 
 			respuesta();// Realizamos le ArcCoseno sobre op1
 		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
@@ -673,9 +666,7 @@ public class Calculadora {
 			res = Math.asin(op2); 
 			respuesta();// Realizamos le ArcSeno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
-			op2 = op1;
-			op1 = 0;		
-			res = Math.asin(op2);
+			res = Math.asin(op1);
 			respuesta();// Realizamos le ArcSeno sobre op1
 		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
@@ -691,9 +682,7 @@ public class Calculadora {
 			res = Math.tan(op2); // realizamos la operación sobre el segundo operando
 			respuesta();
 		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
-			op2 = op1;
-			op1 = 0;
-			res = Math.tan(op2); // realizamos la operacion sobre el primer operando
+			res = Math.tan(op1); // realizamos la operacion sobre el primer operando
 			respuesta();
 		}
 	}
@@ -721,45 +710,54 @@ public class Calculadora {
 			res = Math.sin(op2);
 			respuesta();// realizamos la operación sobre el segundo operando
 		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
-			op2 = op1;
-			op1 = 0;
-			res = Math.sin(op2);
+			res = Math.sin(op1);
 			respuesta();// realizamos la operacion sobre el primer operando
 		}
 	}
 	
+	/**
+	 * Calculo de la potencia
+	 */
 	public static void potencia() {
-		res =(float)Math.pow(op1,op2);
+		res = (float) Math.pow(op1, op2);
 		respuesta();
 	}
 	
+	/**
+	 * Calculo del fasctorial
+	 */
 	public static void factorial() {
 		for(int a = 1 ; a<op2 ; a++) {
 			if(a ==1) {
-			res = op2 * (op2-1);
-			op2--;
-			}
-			else {
-			res =res*(op2-1);
+				res = op2 * (op2-1);
+				op2--;
+			} else {
+				res =res*(op2-1);
 			}
 		}
 		op2++;
-		respuesta();
-		
+		respuesta();	
 	}
 	
+	/**
+	 * Calculo de la raiz
+	 */
 	public static void raiz() {
 		res =(float) Math.sqrt(op2);
-		respuesta();
-		
+		respuesta();	
 	}
 	
+	/**
+	 * calculo del modulo
+	 */
 	public static void modulo() {
 		res = op1%op2;
-		respuesta();
-		
+		respuesta();	
 	}
 	
+	/**
+	 * cálculo de la divion
+	 */
 	public static void división() {
 		if(op2!=0) {
 			res = op1/op2;
@@ -776,47 +774,53 @@ public class Calculadora {
 			}
 		}
 	}
-		
 	
-	
+	/**
+	 * cálculo de la multiplicación
+	 */
 	public static void multiplicacion() {
 		res = op1*op2;
 		respuesta();
 		
 	}
 	
+	/**
+	 * Cálculo de la rest()
+	 */
 	public static void resta() {
 		res = op1-op2;
 		respuesta();
 	}
-		
 	
+	/**
+	 * cálculo de la suma
+	 */
 	public static void suma() {
 		res = op1+op2;
 		respuesta();
 	}
-		
 	
+	/**
+	 * imprime la respuesta en una caja mensaje de Swing.
+	 */
 	public static void respuesta() {
 		if(op1 != 0 && op2 != 0) {
-			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + opr + frmt.format(op2) + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-				null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
+			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + " " + opr + " " + frmt.format(op2) + " = " + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+				null,new Object[] { "Operar con nuevo valor", "Salir al menú" }, null);
 		}
 		else if (op2 == 0){
-			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + opr + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
+			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + " " + opr + " = " + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+					null,new Object[] { "Operar con nuevo valor", "Salir al menú" }, null);
 		} else {
-			selector = JOptionPane.showOptionDialog( null,opr + frmt.format(op2) + "=" + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-					null,new Object[] { "Operar con nuevo valor", "Operar manteniendo valor", "Salir al menú" }, null);
+			selector = JOptionPane.showOptionDialog( null,opr + " " + frmt.format(op2) + " = " + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+					null,new Object[] { "Operar con nuevo valor", "Salir al menú" }, null);
 		}
+		
 		switch(selector){
 			case 0:
 				escritorOperacion();
 				break;
 			case 1:
-				escritorOperacion();
-				break;
-			case 2:
 				firstDialog();
 				break;
 		}
