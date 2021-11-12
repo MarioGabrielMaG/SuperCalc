@@ -6,29 +6,141 @@ import javax.swing.*;
  */
 
 /**
- * Cálculadora basica.
+ * La clase "Calculadora" contiene las funciones necesarias para 
+ * el correcto funcionamiento del programa realizado para
+ * la práctica por parejas requerida para la evaluación 
+ * de la asignatura "Programación" en primer trimestre de Desarrollo de 
+ * Aplicaciones Multiplataforma.
+ * 
+ * Enunciado de la práctica: [https://sway.office.com/MgXv1dUBEET0Vn5z?ref=Link]
+ * 
+ * Los ficheros del proyecto generados por Eclipse, así como el JavaDoc y los Ficheros JAR
+ * se encuentran en el repositorio de GitHub [https://github.com/MarioGabrielMaG/SuperCalc/].
+ * 
+ * Esta clase está pensada para usarla en su totalidad, las funciones aqui desarrolladas
+ * son privadas y no podrán ser llamadas desde otras clases externas.
  * 
  * @author Mario Gabriel Núñez Alcázar de Velasco
  * @author Juan Álvarez
+ * 
  */
 public class Calculadora {
-	/*
-	 * Variables globales.
+	/**
+	 * Variable Global que contendrá en todo momento, y sobre la que se tratará,
+	 * la cadena de caracterés introducida por el usuario correspondiente a la operación
+	 * a realizar.
+	 * 
+	 * La sintaxis de cada operación se puede encontrar en el propio programa a través de
+	 * las opciones de menú "Operaciones disponibles" >> "Mas Ayuda".
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} String - Wrapper
 	 */
-	static String op;  // Operación 
-	static double res; // resultado
-	static double op1; // Primer Operando
-	static double op2; // Segundo Operando
-	static String opr; // Operador
-	static char crctr; // Caracter cualquiera
-	static String num; // Número cualquiera
-	static String opArr[]; // Almacena un array con la operacion dividida en operandos
-	static boolean ejec = true; // Booleano que controla la ejecución del programa
-	static int selector = 0; //Selector para las opciones de JOptionPanel
-	static DecimalFormat frmt = new DecimalFormat("#.#####"); // Malla para el formateo de decimales
+	private static String op;
 	
 	/**
-	 * Funcion primaria del programa
+	 * Resultado de la operación realizada; Inicializada a zeros.
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa.
+	 * 
+	 * {@systemProperty Type} double - Primitive
+	 */
+	private static double res = 0.0;
+	
+	/**
+	 * Primer operando introducido por el usuario; inicializada a zeros.
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} double - Primitive
+	 */
+	private static double op1 = 0.0;
+	
+	/**
+	 * Segundo operando introducido por el usuario; inicializada a zeros
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} double - Primitive
+	 */
+	private static double op2 = 0.0;
+	
+	/**
+	 * Operador introducido por el usuario.
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} String - Wrapper
+	 */
+	private static String opr;
+	
+	/**
+	 * Variable destinada a la lectura de los carácteres uno a uno para la identificación del
+	 * tipo de operacion solicitada
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} char - Primitive
+	 */
+	private static char crctr;
+	
+	/**
+	 * Array diseñada para el almacenamiento de la operación divida en operandos.
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} String[] - Wrapper Array
+	 */
+	private static String opArr[];
+	
+	/**
+	 * Variable booleana diseñada para controlar la ejecución del programa; 
+	 * inicializada con valor "True"
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} boolean - Primitive
+	 */
+	private static boolean ejec = true;
+	
+	/**
+	 * Variable diseñada para funcionar como selector para las opciones de java.swing.JOptionPanel();
+	 * inicializado a zeros
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} int - Primitive
+	 */
+	private static int selector = 0;
+	
+	/**
+	 * Variable diseñada para actuar de Malla para el formateo de los decimales en la impresión
+	 * en pantalla con java.swing; incializado con la malla "#.#####", está actuara como malla
+	 * por defecto.
+	 * 
+	 * Esta variable se trata de forma interna por lo que es de caracter privado impidiendo
+	 * la llamada a las mismas a través de una clase externa. 
+	 * 
+	 * {@systemProperty Type} DecimalFormat - Wrapper - java.text.DecimalFormat
+	 */
+	private static DecimalFormat frmt = new DecimalFormat("#.#####");
+	
+	/**
+	 * Función primaria del programa, este contiene las lineas imprescindibles para
+	 * la correcta ejecución del mismo.
+	 * 
+	 * Esta función es la primera en ejecutarse.
+	 * 
 	 * @param args String[]
 	 */
 	public static void main(String[] args) {	
@@ -37,104 +149,148 @@ public class Calculadora {
 		 * operacion sin tener que volver a ejecutar el programa
 		 */
 		do {
-			firstDialog();
+			firstDialog(); // llamamos a la función que mostrará el primer menú
 		} while(ejec); // si "ejec" es True, sigue ejecutando.
 	}
 	
+	/**
+	 * Menú principal. este mostrará una ventana de tipo input con tres opciones:
+	 * 
+	 * 	> Operar -> Valor Selector '0' --> llamará a la funcion escritorOperacion();
+	 * 	> Operaciones disponibles -> Valor Selector '1' --> llamará a la función listaOperaciones();
+	 * 	> Salir -> Valor Selector '2' --> Finalizará la ejecución del programa.
+	 */
 	public static void firstDialog() {
+		/*
+		 * Ventana tipo Mensaje que mostrará tres botones, uno para cada seleccion, retornando
+		 * su correspondiente selector
+		 */
 		selector = JOptionPane.showOptionDialog( null,
-												"Seleccione opcion",  
-												"Selector de opciones",
-												JOptionPane.YES_NO_CANCEL_OPTION, 
-												JOptionPane.QUESTION_MESSAGE,
+												"Seleccione opcion", // Mensaje situado en la caja de texto
+												"Selector de opciones", // Título de la ventana
+												JOptionPane.YES_NO_CANCEL_OPTION, // Tipo de selector 
+												JOptionPane.QUESTION_MESSAGE, // Tipo de Mensaje
 												null,
-												new Object[] { "Operar", 
-															   "operaciones Disponibles", 
-															   "Salir" 
+												/*
+												 * Opciones del menú, el indice del Array Object[] actuará de selector; este es el valor que se retornará a la variable "selector"
+												 */
+												new Object[] { "Operar", // Boton "Operar" 
+															   "Operaciones disponibles", // Boton "Operaciones disponibles" 
+															   "Salir" // Botón "Salir"
 															 }, 
 												null);
 		
+		/*
+		 * Evaluamos el valor retornado "selector"
+		 */
 		switch(selector){
-			case 0:
-				escritorOperacion();
+			case 0: // En el caso de que sea "0", significa que el usuario a pulsado la opcion "Operar"
+				escritorOperacion(); // llamamos a la función escritorOperación();
 				break;
-			case 1:
-				listaoperaciones();
+			case 1: // En el caso de que sea "1", significa que el usuario a pulsado la opcion "Operaciones disponibles" 
+				listaOperaciones(); // llamamos a la función listaOperaciones(); 
 				break;
-			case 2:
-				ejec = false; // inicializamos ejec a False para salir de la ejecución
+			case 2: // En el caso de que sea "0", significa que el usuario a pulsado la opcion Salis
+				ejec = false; // Inicializamos "ejec" a "False" para salir de la ejecución
 				break;
 		}
 	}
 	
-	public static void listaoperaciones() { //menú de operaciones	
+	/**
+	 * Lista de Operaciones, sistema de ayuda. este mostrará una ventana de tipo input con una 
+	 * lista de las operaciones que realiza el programa y tres opciones de selección:
+	 * 
+	 * 	> Operar -> Valor Selector '0' --> llamará a la funcion escritorOperacion();
+	 * 	> Volver al menú -> Valor Selector '1' --> llamará a la función firstDialog();
+	 * 	> Más ayuda -> Valor Selector '2' --> llamará a la funcion ayuda()
+	 */
+	public static void listaOperaciones() {
+		/*
+		 * Ventana tipo mensaje que mostrará tres botones, uno para cada seleccion, retornando
+		 * su correspondiente selector
+		 */
 		selector = JOptionPane.showOptionDialog(null,
-												"Las operaciónes disponibles son:\n" +
-												"---------------------------------\n"+
-												"> Suma (+)\n"+
-												"> Resta (-)\n"+
-												"> Multiplicación (*)\n"+
-												"> División (/)\n"+
-												"> Módulo (%)\n"+
-												"> Raiz Cuadrada (sqr)\n"+
-												"> Factorial (!)\n"+
-												"> Potencia (^)\n"+
-												"> Seno (SEN)\n"+
-												"> Coseno (COS)\n"+
-												"> Tangente (TAN)\n"+
-												"> Arcoseno (ARCSEN)\n"+
-												"> Arcocoseno (ARCOS)\n"+
-												"> Mayor número (>)\n"+
-												"> Menor número (<)\n",  
-												"Lista de operaciones",
-												JOptionPane.YES_NO_CANCEL_OPTION, 
-												JOptionPane.QUESTION_MESSAGE,
+												"Las operaciónes disponibles son:\n" +  // Cadena de texto con el mensaje que contendra la ventana. 
+												"---------------------------------\n"+  // "							"						"
+												"> Suma (+)\n"+							// "							"						"				
+												"> Resta (-)\n"+						// "							"						"
+												"> Multiplicación (*)\n"+				// "							"						"
+												"> División (/)\n"+						// "							"						"
+												"> Módulo (%)\n"+						// "							"						"
+												"> Raiz Cuadrada (sqr)\n"+				// "							"						"
+												"> Factorial (!)\n"+					// "							"						"
+												"> Potencia (^)\n"+						// "							"						"
+												"> Seno (SEN)\n"+						// "							"						"
+												"> Coseno (COS)\n"+						// "							"						"
+												"> Tangente (TAN)\n"+					// "							"						"
+												"> Arcoseno (ARCSEN)\n"+				// "							"						"
+												"> Arcocoseno (ARCOS)\n"+				// "							"						"
+												"> Mayor número (>)\n"+					// "							"						"
+												"> Menor número (<)\n",					// "							"						"
+												"Lista de operaciones",	// Título de la ventana
+												JOptionPane.YES_NO_CANCEL_OPTION, // Tipo de selector 
+												JOptionPane.QUESTION_MESSAGE, // Tipo de mensaje 
 												null,
-												new Object[] { "Operar",
-															   "Volver al menú",
-															   "Más ayuda" 
+												/*
+												 * Opciones del menú, el indice del Array Object[] actuará de selector; este es el valor que se retornará a la variable "selector"
+												 */
+												new Object[] { "Operar", // Botón "Operar" 
+															   "Volver al menú", // Botón "Volver al menú"
+															   "Más ayuda" // Botón "Mas Ayuda"
 															 }, 
 												null);
-		
+		/*
+		 * Evaluamos el valor retornado "selector"
+		 */
 		switch(selector){
-			case 0:
-				escritorOperacion();
+			case 0: // En el caso de que sea "0", significa que el usuario a pulsado la opcion "Operar"
+				escritorOperacion(); // llamamos a la función escritorOperación();
 				break;
-			case 1:
-				firstDialog();
+			case 1: // En el caso de que sea "1", significa que el usuario a pulsado la opcion "Volver al menú"
+				firstDialog(); // llamamos a la función firstDialog();
 				break;
-			case 2:
-				Ayuda();
+			case 2: // En el caso de que sea "2", significa que el usuario a pulsado la opcion "Más ayuda"
+				ayuda(); // llamamos a la función ayuda();
 				break;
 		}
 		
 	}
 	
-	public static void Ayuda() {	//menú de ayuda	
+	/**
+	 * Sintaxis de las operaciones, sistema de ayuda. este mostrará una ventana de tipo input con una 
+	 * lista de la sintaxis correspondiente a laca operación que realiza el programa y dos opciones de selección:
+	 * 
+	 * 	> Operar -> Valor Selector '0' --> llamará a la funcion escritorOperacion();
+	 * 	> Volver al menú -> Valor Selector '1' --> llamará a la función firstDialog();
+	 */
+	public static void ayuda() {
 		selector = JOptionPane.showOptionDialog( null,
-												"Ayuda sobre el uso de las operaciónes:\n" +
-												"---------------------------------------\n"+
-												"> Suma (A+B= Suma A más B)\n" +
-												"> Resta (A-B= Resta A menos B)\n" +
-												"> Multiplicación (A*B= Multiplicación A por B)\n" +
-												"> División (A/B= División A entre B)\n" +
-												"> Módulo (A%B= Módulo de A sobre B)\n" +
-												"> Raiz Cuadrada (A sqr= raiz cuadrada de A)\n" +
-												"> Factorial (!A = Multiplicación de todos los números hasta A)\n" +
-												"> Potencia (A^B = Resultado de A elevado a B)\n" +
-												"> Seno (A SEN = Seno de A  )\n" +
-												"> Coseno (A COS = Coseno de A)\n" +
-												"> Tangente (A TAN = Tangente de A)\n" +
-												"> Arcoseno (A ARCSEN = Arcseno de A)\n" +
-												"> Arcocoseno (A ARCOS = Arcoseno de A)\n" +
-												"> Mayor número (A>B = mayor número entre A y B)\n" +
-												"> Menor número (A<B = menor número entre A y B)", 
-												"Uso de operaciones",
-												JOptionPane.YES_NO_CANCEL_OPTION, 
-												JOptionPane.QUESTION_MESSAGE,
+												"Ayuda sobre el uso de las operaciones:\n" +								// Cadena de texto con el mensaje que contendra la ventana.
+												"---------------------------------------\n" +								// "							"						"
+												"> Suma: [A] + [B] = [Suma A más B]\n" +									// "							"						"
+												"> Resta: [A] - [B] = [Resta A menos B]\n" +								// "							"						"
+												"> Multiplicación: [A] * [B] = [Multiplicación A por B]\n" +				// "							"						"
+												"> División: [A] / [B] = [División A entre B]\n" +							// "							"						"
+												"> Módulo: [A] [% / MOD] [B] = [Módulo de A sobre B]\n" +					// "							"						"
+												"> Raiz Cuadrada: [A] SQR = [raiz cuadrada de A]\n" +						// "							"						"
+												"> Factorial: ![A] = [Multiplicación de todos los números hasta A]\n" +		// "							"						"
+												"> Potencia: [A] ^ [B] = [Resultado de A elevado a B]\n" +					// "							"						"
+												"> Seno: [A] SEN = [Seno de A]\n" +											// "							"						"
+												"> Coseno: [A] COS = [Coseno de A]\n" +										// "							"						"
+												"> Tangente: [A] TAN = [Tangente de A]\n" +									// "							"						"
+												"> Arcoseno: [A] ARCSEN = [Arcseno de A]\n" +								// "							"						"
+												"> Arcocoseno: [A] ARCOS = [Arcoseno de A]\n" +								// "							"						"
+												"> Mayor número: [A] > [B] = [mayor número entre A y B]\n" +				// "							"						"
+												"> Menor número [A] < [B] = [menor número entre A y B]", 					// "							"						"
+												"Uso de operaciones", // Título de la ventana
+												JOptionPane.YES_NO_CANCEL_OPTION, // Tipo de selector
+												JOptionPane.QUESTION_MESSAGE, // Tipo de mensaje
 												null,
-												new Object[] {"Operar", 
-															  "Volver al menú"
+												/*
+												 * Opciones del menú, el indice del Array Object[] actuará de selector; este es el valor que se retornará a la variable "selector"
+												 */
+												new Object[] {"Operar", // Botón "Operar" 
+														   	  "Volver al menú", // Botón "Volver al menú"
 														     }, 
 												null);
 		
@@ -639,7 +795,6 @@ public class Calculadora {
 		res = op1+op2;
 		respuesta();
 	}
-		
 		
 	
 	public static void respuesta() {
