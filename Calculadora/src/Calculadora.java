@@ -307,15 +307,15 @@ public class Calculadora {
 
 	}
 	
-	/*
-	 * función que muestra un input para que el usuario pueda introducir la operación
+	/**
+	 * Función que muestra un input para que el usuario pueda introducir la operación
 	 */
 	private static void escritorOperacion() {
 		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE).toUpperCase();       
 		operaciones();
 	}
 	
-	/*
+	/**
 	 * Funcion que identifica el tipo de operando introducido por el usuario en la operación 
 	 */
 	private static void operaciones() {	// filtramos la operación recibida por el usuario
