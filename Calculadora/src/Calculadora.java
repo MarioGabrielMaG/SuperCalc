@@ -14,8 +14,8 @@ import javax.swing.*;
  * 
  * Enunciado de la práctica: [https://sway.office.com/MgXv1dUBEET0Vn5z?ref=Link]
  * 
- * Los ficheros del proyecto generados por Eclipse, así como el JavaDoc y los Ficheros JAR
- * se encuentran en el repositorio de GitHub [https://github.com/MarioGabrielMaG/SuperCalc/].
+ * Los ficheros del proyecto generados por Eclipse, se encuentran en el 
+ * repositorio de GitHub [https://github.com/MarioGabrielMaG/SuperCalc/].
  * 
  * Esta clase está pensada para usarla en su totalidad, las funciones aqui desarrolladas
  * son privadas y no podrán ser llamadas desde otras clases externas.
@@ -160,7 +160,7 @@ public class Calculadora {
 	 * 	> Operaciones disponibles -> Valor Selector '1' --> llamará a la función listaOperaciones();
 	 * 	> Salir -> Valor Selector '2' --> Finalizará la ejecución del programa.
 	 */
-	public static void firstDialog() {
+	private static void firstDialog() {
 		/*
 		 * Ventana tipo Mensaje que mostrará tres botones, uno para cada seleccion, retornando
 		 * su correspondiente selector
@@ -204,7 +204,7 @@ public class Calculadora {
 	 * 	> Volver al menú -> Valor Selector '1' --> llamará a la función firstDialog();
 	 * 	> Más ayuda -> Valor Selector '2' --> llamará a la funcion ayuda()
 	 */
-	public static void listaOperaciones() {
+	private static void listaOperaciones() {
 		/*
 		 * Ventana tipo mensaje que mostrará tres botones, uno para cada seleccion, retornando
 		 * su correspondiente selector
@@ -263,7 +263,7 @@ public class Calculadora {
 	 * 	> Operar -> Valor Selector '0' --> llamará a la funcion escritorOperacion();
 	 * 	> Volver al menú -> Valor Selector '1' --> llamará a la función firstDialog();
 	 */
-	public static void ayuda() {
+	private static void ayuda() {
 		selector = JOptionPane.showOptionDialog( null,
 												"Ayuda sobre el uso de las operaciones:\n" +								// Cadena de texto con el mensaje que contendra la ventana.
 												"---------------------------------------\n" +								// "							"						"
@@ -310,7 +310,7 @@ public class Calculadora {
 	/*
 	 * función que muestra un input para que el usuario pueda introducir la operación
 	 */
-	public static void escritorOperacion() {
+	private static void escritorOperacion() {
 		op = JOptionPane.showInputDialog(null,"Introduce una operación", JOptionPane.QUESTION_MESSAGE).toUpperCase();       
 		operaciones();
 	}
@@ -318,7 +318,7 @@ public class Calculadora {
 	/*
 	 * Funcion que identifica el tipo de operando introducido por el usuario en la operación 
 	 */
-	public static void operaciones() {	// filtramos la operación recibida por el usuario
+	private static void operaciones() {	// filtramos la operación recibida por el usuario
 		opr = identif(); // Analizamos la operación introducida por el usuario en busca del operador.
 		opArr = new String[0]; // inicializamos el Array que contendra los operadores 
 		
@@ -441,7 +441,7 @@ public class Calculadora {
 	 * @param String num //Número real con el separador ',' (coma)
 	 * @return Double //Número real con el separador '.' (punto) 
 	 */
-	public static Double suspc(String num) {
+	private static Double suspc(String num) {
 		/*
 		 * Realizamos un 'For' para recorrer el número en busca del carácter coma (',')
 		 */
@@ -459,7 +459,7 @@ public class Calculadora {
 	 * Identificar el tipo de operacion solicitada.
 	 * @return String opr
 	 */
-	public static String identif(){ 
+	private static String identif(){ 
 		opr = null; // inicializamos el operador a Null ya que introduciremos un dato nuevo en el 
 		
 		/*
@@ -508,7 +508,7 @@ public class Calculadora {
 	 * Función que indica cual de los dos numeros es menor.
 	 * @param
 	 */
-	public static void menornum() {
+	private static void menornum() {
 		if (op1 > op2) { // si op1 es mayor que op2
 			/*
 			 * ### Caso en el que el segundo operador es menor que el primero
@@ -576,7 +576,7 @@ public class Calculadora {
 	 * Función que indica cual de los dos numeros es mayor.
 	 * @param
 	 */
-	public static void mayornum() {
+	private static void mayornum() {
 		if (op1 > op2) { // si op1 es mayor que op2
 			/*
 			 * ### Caso en el que el primer operador es mayor que el segundo
@@ -645,7 +645,7 @@ public class Calculadora {
 	 * Calculo del ArcCoseno del ángulo en radianes especificado.
 	 * @param
 	 */
-	public static void arcos() {
+	private static void arcos() {
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			res = Math.acos(op2); 
 			respuesta();// Realizamos le ArcCoseno sobre op2
@@ -661,7 +661,7 @@ public class Calculadora {
 	 * Calculo del ArcSeno del ángulo especificado.
 	 * @param
 	 */
-	public static void arcseno() {
+	private static void arcseno() {
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
 			res = Math.asin(op2); 
 			respuesta();// Realizamos le ArcSeno sobre op2
@@ -677,7 +677,7 @@ public class Calculadora {
 	 * Calculo de la tangente del ángulo especificado.
 	 * @param
 	 */
-	public static void tangente() {
+	private static void tangente() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0
 			res = Math.tan(op2); // realizamos la operación sobre el segundo operando
 			respuesta();
@@ -691,7 +691,7 @@ public class Calculadora {
 	 * Calculo del Coseno del ángulo especificado en radianes.
 	 * @param
 	 */
-	public static void coseno() {
+	private static void coseno() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0		
 			res = Math.cos(op2); // realizamos la operación sobre el segundo operando
 			respuesta();
@@ -705,7 +705,7 @@ public class Calculadora {
 	 * Calculo del Seno del ángulo especificado en radianes.
 	 * @param
 	 */
-	public static void seno() {
+	private static void seno() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0
 			res = Math.sin(op2);
 			respuesta();// realizamos la operación sobre el segundo operando
@@ -718,7 +718,7 @@ public class Calculadora {
 	/**
 	 * Calculo de la potencia
 	 */
-	public static void potencia() {
+	private static void potencia() {
 		res = (float) Math.pow(op1, op2);
 		respuesta();
 	}
@@ -726,13 +726,13 @@ public class Calculadora {
 	/**
 	 * Calculo del fasctorial
 	 */
-	public static void factorial() {
-		for(int a = 1 ; a<op2 ; a++) {
-			if(a ==1) {
+	private static void factorial() {
+		for(int a = 1 ;a < op2 ;a++) {
+			if(a == 1) {
 				res = op2 * (op2-1);
 				op2--;
 			} else {
-				res =res*(op2-1);
+				res = res * (op2-1);
 			}
 		}
 		op2++;
@@ -742,23 +742,23 @@ public class Calculadora {
 	/**
 	 * Calculo de la raiz
 	 */
-	public static void raiz() {
-		res =(float) Math.sqrt(op2);
+	private static void raiz() {
+		res = (float) Math.sqrt(op2);
 		respuesta();	
 	}
 	
 	/**
 	 * calculo del modulo
 	 */
-	public static void modulo() {
-		res = op1%op2;
+	private static void modulo() {
+		res = op1 % op2;
 		respuesta();	
 	}
 	
 	/**
 	 * cálculo de la divion
 	 */
-	public static void división() {
+	private static void división() {
 		if(op2!=0) {
 			res = op1/op2;
 			respuesta();
@@ -778,7 +778,7 @@ public class Calculadora {
 	/**
 	 * cálculo de la multiplicación
 	 */
-	public static void multiplicacion() {
+	private static void multiplicacion() {
 		res = op1*op2;
 		respuesta();
 		
@@ -787,7 +787,7 @@ public class Calculadora {
 	/**
 	 * Cálculo de la rest()
 	 */
-	public static void resta() {
+	private static void resta() {
 		res = op1-op2;
 		respuesta();
 	}
@@ -795,7 +795,7 @@ public class Calculadora {
 	/**
 	 * cálculo de la suma
 	 */
-	public static void suma() {
+	private static void suma() {
 		res = op1+op2;
 		respuesta();
 	}
@@ -803,7 +803,7 @@ public class Calculadora {
 	/**
 	 * imprime la respuesta en una caja mensaje de Swing.
 	 */
-	public static void respuesta() {
+	private static void respuesta() {
 		if(op1 != 0 && op2 != 0) {
 			selector = JOptionPane.showOptionDialog( null,frmt.format(op1) + " " + opr + " " + frmt.format(op2) + " = " + frmt.format(res),  "Resultado de la operación",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
 				null,new Object[] { "Operar con nuevo valor", "Salir al menú" }, null);
