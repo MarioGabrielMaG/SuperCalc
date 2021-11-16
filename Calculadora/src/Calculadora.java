@@ -647,10 +647,10 @@ public class Calculadora {
 	 */
 	private static void arcos() {
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
-			res = Math.acos(op2); 
+			res = Math.acos(Math.toRadians(op2)); 
 			respuesta();// Realizamos le ArcCoseno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
-			res = Math.acos(op1); 
+			res = Math.acos(Math.toRadians(op1)); 
 			respuesta();// Realizamos le ArcCoseno sobre op1
 		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
@@ -663,10 +663,10 @@ public class Calculadora {
 	 */
 	private static void arcseno() {
 		if (op2 != 0) { // Si el segundo operador no esta vacio, realizamos la operacion sobre el mismo
-			res = Math.asin(op2); 
+			res = Math.asin(Math.toRadians(op2)); 
 			respuesta();// Realizamos le ArcSeno sobre op2
 		} else if (op1 != 0) { // De lo contrario si el primer operador no esta vacio, realiza la operación
-			res = Math.asin(op1);
+			res = Math.asin(Math.toRadians(op1));
 			respuesta();// Realizamos le ArcSeno sobre op1
 		} else { // sino
 			System.out.println("Error: no se ha encontrado operador"); // De lo contrario, muestra error
@@ -679,10 +679,10 @@ public class Calculadora {
 	 */
 	private static void tangente() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0
-			res = Math.tan(op2); // realizamos la operación sobre el segundo operando
+			res = Math.tan(Math.toRadians(op2)); // realizamos la operación sobre el segundo operando
 			respuesta();
 		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
-			res = Math.tan(op1); // realizamos la operacion sobre el primer operando
+			res = Math.tan(Math.toRadians(op1)); // realizamos la operacion sobre el primer operando
 			respuesta();
 		}
 	}
@@ -693,10 +693,10 @@ public class Calculadora {
 	 */
 	private static void coseno() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0		
-			res = Math.cos(op2); // realizamos la operación sobre el segundo operando
+			res = Math.cos(Math.toRadians(op2)); // realizamos la operación sobre el segundo operando
 			respuesta();
 		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
-			res = Math.cos(op1);
+			res = Math.cos(Math.toRadians(op1));
 			respuesta();// realizamos la operacion sobre el primer operando
 		}
 	}
@@ -707,10 +707,10 @@ public class Calculadora {
 	 */
 	private static void seno() {
 		if (op2 != 0) { // si el operador 2 es distinto de 0
-			res = Math.sin(op2);
+			res = Math.sin(Math.toRadians(op2));
 			respuesta();// realizamos la operación sobre el segundo operando
 		} else if (op1 != 0) { // sino y si el operador 1 es distinto de 0
-			res = Math.sin(op1);
+			res = Math.sin(Math.toRadians(op1));
 			respuesta();// realizamos la operacion sobre el primer operando
 		}
 	}
@@ -727,15 +727,17 @@ public class Calculadora {
 	 * Calculo del fasctorial
 	 */
 	private static void factorial() {
-		for(int a = 1 ;a < op2 ;a++) {
-			if(a == 1) {
-				res = op2 * (op2-1);
-				op2--;
-			} else {
-				res = res * (op2-1);
+		res = op2;
+		if (op2 == 1 || op2 == 0) {
+			res = 1;
+		} else if (op2 == 2) {
+			res = 2;
+		} else {
+			for(double a = (op2-1) ; a > 1 ;a--) {
+				res = res * (a);
 			}
 		}
-		op2++;
+		
 		respuesta();	
 	}
 	
